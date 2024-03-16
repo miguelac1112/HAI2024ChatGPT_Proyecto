@@ -14,7 +14,8 @@ const {
 
 console.log("testing");
 // Url to Live2D
-const modelUrl = "../models/hiyori/hiyori_pro_t10.model3.json";
+//const modelUrl = "../models/hiyori/hiyori_pro_t10.model3.json";
+const modelUrl = "../models/miku/miku.model3.json";
 
 let currentModel, facemesh;
 
