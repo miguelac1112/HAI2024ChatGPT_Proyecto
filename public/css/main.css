@@ -34,13 +34,13 @@
     width: 100px;
 }
 
-#live2d{
+#live2d {
     position: absolute;
-    left:0px;
-    top:300px;
-    /*background-image: url('pabellonv.jpg');
-    background-size: cover; /* Para ajustar la imagen al tamaño del canvas */
+    left: 300px;
+    top: 150px;
+    width: 1000px;
 }
+
 
 #BeginRecognition {
     background-color: #38e08c; /* Color morado */
