@@ -37,7 +37,9 @@
 #live2d{
     position: absolute;
     left:0px;
-    top:0px;
+    top:300px;
+    /*background-image: url('pabellonv.jpg');
+    background-size: cover; /* Para ajustar la imagen al tamaño del canvas */
 }
 
 #BeginRecognition {
