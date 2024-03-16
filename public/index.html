@@ -7,21 +7,24 @@
     <style>
         body {
             background-image: url('Fondo5.jpg');
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
         }
-    </style>
-    <!--     Live2D SDK  -->
-    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
-    <!--     PixiJS Renderer -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
-    <!--     PixiJS Live2D Plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/kalidokit@1.1/dist/kalidokit.umd.js"></script>
-    <script src="js/main.js" type="module" defer></script>
-    <link rel="stylesheet" href="css/main.css">
-    
-    <!-- Estilos CSS para el botón -->
-    <style>
+
+        #avatarText {
+            position: absolute;
+            top: 0;
+            color: black; /* Cambiado a negro */
+            font-size: 24px;
+            font-weight: bold;
+        }
+
         #BeginRecognition {
             background-color: #38e08c; /* Color morado */
             border: none;
@@ -34,10 +37,10 @@
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 12px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); /* Reducido el efecto de sombra */
             transition: background-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            position: absolute; /* Alinear al centro superior */
+            top: 20px;
         }
 
         #BeginRecognition:hover {
@@ -75,7 +78,7 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(4); /* Aumentar tamaño al presionar */
+                transform: scale(1.02); /* Ajustado el tamaño de la animación */
             }
             100% {
                 transform: scale(1);
@@ -85,53 +88,49 @@
         #BeginRecognition:active span {
             animation: pulse 0.3s linear;
         }
-    </style>
 
-    <style>
         #TextDetection, #GPTAnswer {
             font-family: Arial, sans-serif; /* Cambio de fuente */
             font-size: 18px; /* Tamaño de fuente */
             color: #333; /* Color de texto */
-            animation: pulse 2s ease-in-out infinite; /* Animación más suave */
+            animation: slide 1.5s linear infinite alternate; /* Animación más suave */
             font-weight: bold; /* Resaltar en negrita */
-            display: inline-block; /* Para alinear verticalmente */
-            vertical-align: middle; /* Para alinear verticalmente */
-        }
-
-        #TextDetection {
-            max-width: 80%; /* Ancho máximo del contenedor */
-            margin-right: 20%; /* Agregar espacio a la derecha */
-        }
-
-        #GPTAnswer {
-            position: fixed; /* Fijar la posición */
+            position: absolute; /* Fijar la posición */
             top: 50%; /* Alinear la parte superior al centro verticalmente */
-            right: 10px; /* Alinear el lado derecho a 10px del borde derecho */
             transform: translateY(-50%); /* Centrar verticalmente */
-            padding: 10px; /* Espaciado interno */
-            border-radius: 5px; /* Borde redondeado */
         }
 
-        @keyframes pulse {
+        @keyframes slide {
             0% {
-                transform: scale(1); /* Tamaño normal */
-            }
-            50% {
-                transform: scale(1.05); /* Aumentar tamaño */
+                transform: translateX(-10px); /* Movimiento hacia la izquierda */
             }
             100% {
-                transform: scale(1); /* Volver al tamaño normal */
+                transform: translateX(10px); /* Movimiento hacia la derecha */
             }
         }
     </style>
-
-    
+    <!--     Live2D SDK  -->
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    <!--     PixiJS Renderer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
+    <!--     PixiJS Live2D Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/kalidokit@1.1/dist/kalidokit.umd.js"></script>
+    <script src="js/main.js" type="module" defer></script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    <div id="avatarText">AVATAR MIKU</div>
     <canvas id="live2d"></canvas>  
     <button id="BeginRecognition"><span>PRESIONA PARA HABLAR</span></button> <!-- Cambio del texto del botón -->
-    <div id="TextDetection"></div>
-    <div id="GPTAnswer"></div>
+    <div id="TextDetection">Texto de detección</div>
+    <div id="GPTAnswer">Respuesta de GPT</div>
 </body>
 </html>
+
+
+
+
+
 
