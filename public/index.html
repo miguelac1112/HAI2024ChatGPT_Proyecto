@@ -19,11 +19,79 @@
     <script src="https://cdn.jsdelivr.net/npm/kalidokit@1.1/dist/kalidokit.umd.js"></script>
     <script src="js/main.js" type="module" defer></script>
     <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Estilos CSS para el botón -->
+    <style>
+        #BeginRecognition {
+            background-color: #38e08c; /* Color morado */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+            transition: background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #BeginRecognition:hover {
+            background-color: #45a049; /* Cambio de color al pasar el mouse */
+        }
+
+        #BeginRecognition::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%; /* Modificado */
+            height: 100%; /* Modificado */
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease;
+            border-radius: 50%;
+            z-index: 0;
+            transform: translate(-50%, -50%) scale(1); /* Modificado */
+        }
+
+        #BeginRecognition:hover::before {
+            width: 0;
+            height: 0;
+            top: 50%;
+            left: 50%;
+        }
+
+        #BeginRecognition span {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(4); /* Aumentar tamaño al presionar */
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #BeginRecognition:active span {
+            animation: pulse 0.3s linear;
+        }
+    </style>
 </head>
 <body>
     <canvas id="live2d"></canvas>  
-    <button id="BeginRecognition">Empezar reconocimiento</button>
+    <button id="BeginRecognition"><span>PRESIONA PARA HABLAR</span></button> <!-- Cambio del texto del botón -->
     <div id="TextDetection"></div>
     <div id="GPTAnswer"></div>
 </body>
 </html>
+

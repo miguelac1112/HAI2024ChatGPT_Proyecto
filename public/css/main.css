@@ -39,3 +39,64 @@
     left:0px;
     top:0px;
 }
+
+#BeginRecognition {
+    background-color: #38e08c; /* Color morado */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#BeginRecognition:hover {
+    background-color: #45a049; /* Cambio de color al pasar el mouse */
+}
+
+.cover {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%; /* Modificado */
+    height: 100%; /* Modificado */
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease;
+    border-radius: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%) scale(1); /* Modificado */
+}
+
+.cover.pulse {
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    animation: pulse 0.3s linear;
+}
+
+#BeginRecognition span {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(4); /* Aumentar tamaño al presionar */
+    }
+    100% {
+        transform: scale(1);
+    }
+}
