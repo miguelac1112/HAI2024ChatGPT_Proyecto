@@ -14,48 +14,66 @@ let currentModel;
 const videoElement = document.querySelector(".input_video"),
     guideCanvas = document.querySelector("canvas.guides");
 
-(async function main() {
-    // create pixi application
-    const app = new PIXI.Application({
-        view: document.getElementById("live2d"),
-        autoStart: true,
-        backgroundAlpha: 0,
-        backgroundColor: 0xffffff,
-        resizeTo: window,
-    });
-
-    // load live2d model
-    currentModel = await Live2DModel.from(modelUrl, { autoInteract: false });
-    currentModel.scale.set(0.5);
-    currentModel.interactive = true;
-    currentModel.anchor.set(0.5, 0.5);
-    currentModel.position.set(window.innerWidth * 0.5, window.innerHeight * 1);
-
-    // Add events to drag model
-    currentModel.on("pointerdown", (e) => {
-        currentModel.offsetX = e.data.global.x - currentModel.position.x;
-        currentModel.offsetY = e.data.global.y - currentModel.position.y;
-        currentModel.dragging = true;
-    });
-    currentModel.on("pointerup", (e) => {
-        currentModel.dragging = false;
-    });
-    currentModel.on("pointermove", (e) => {
-        if (currentModel.dragging) {
-            currentModel.position.set(e.data.global.x - currentModel.offsetX, e.data.global.y - currentModel.offsetY);
-        }
-    });
-
-    // Add mousewheel events to scale model
-    // document.querySelector("#live2d").addEventListener("wheel", (e) => {
-    //     e.preventDefault();
-    //     currentModel.scale.set(clamp(currentModel.scale.x + event.deltaY * -0.001, -0.5, 10));
-    // });
-
-    // add live2d model to stage
-    app.stage.addChild(currentModel);
-    window.currentModel = currentModel;
-})();
+    (async function main() {
+        // create pixi application
+        const app = new PIXI.Application({
+            view: document.getElementById("live2d"),
+            autoStart: true,
+            backgroundAlpha: 0,
+            resizeTo: window,
+        });
+    
+        let backgroundImage;
+    
+        // Función para cargar y ajustar la imagen de fondo
+        const loadBackgroundImage = async () => {
+            backgroundImage = await PIXI.Sprite.from('Fondo5.jpg');
+            resizeBackgroundImage();
+            app.stage.addChildAt(backgroundImage, 0);
+        };
+    
+        // Función para ajustar el tamaño de la imagen de fondo
+        const resizeBackgroundImage = () => {
+            if (backgroundImage) {
+                backgroundImage.width = app.screen.width;
+                backgroundImage.height = app.screen.height;
+            }
+        };
+    
+        // Cargar la imagen de fondo y ajustarla inicialmente
+        await loadBackgroundImage();
+    
+        // Escuchar el evento de cambio de tamaño de la ventana
+        window.addEventListener('resize', resizeBackgroundImage);
+    
+        // load live2d model
+        currentModel = await Live2DModel.from(modelUrl, { autoInteract: false });
+        currentModel.scale.set(0.5);
+        currentModel.interactive = true;
+        currentModel.anchor.set(0.5, 0.5);
+        
+        // Posiciona el modelo a la izquierda y un poco más arriba
+        currentModel.position.set(app.screen.width * 0.15, app.screen.height * 0.5);
+    
+        // Add events to drag model
+        currentModel.on("pointerdown", (e) => {
+            currentModel.offsetX = e.data.global.x - currentModel.position.x;
+            currentModel.offsetY = e.data.global.y - currentModel.position.y;
+            currentModel.dragging = true;
+        });
+        currentModel.on("pointerup", (e) => {
+            currentModel.dragging = false;
+        });
+        currentModel.on("pointermove", (e) => {
+            if (currentModel.dragging) {
+                currentModel.position.set(e.data.global.x - currentModel.offsetX, e.data.global.y - currentModel.offsetY);
+            }
+        });
+    
+        // Add live2d model to stage
+        app.stage.addChild(currentModel);
+        window.currentModel = currentModel;
+    })();
 
 
 window.mover_boca = (x,y, lerpAmount = 0.7) => {

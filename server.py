@@ -32,7 +32,7 @@ Tus respuestas deben ser de 3 oraciones con no mas de 5 palabras.
 '''
 
 def get_gpt_answer(messages):
-    completion = client.chat.completions.create(
+    completion = client.chat.completions.create(    
         model="gpt-3.5-turbo",  
         messages = messages
     )

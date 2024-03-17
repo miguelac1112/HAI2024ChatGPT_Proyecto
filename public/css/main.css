@@ -34,11 +34,10 @@
     width: 100px;
 }
 
-#live2d {
+#live2d{
     position: absolute;
-    left: 300px;
-    top: 150px;
-    width: 1000px;
+    left:0px;
+    top:0px;
 }
 
 
