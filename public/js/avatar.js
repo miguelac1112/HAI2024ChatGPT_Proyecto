@@ -27,7 +27,7 @@ const videoElement = document.querySelector(".input_video"),
     
         // Función para cargar y ajustar la imagen de fondo
         const loadBackgroundImage = async () => {
-            backgroundImage = await PIXI.Sprite.from('Fondo5.jpg');
+            backgroundImage = await PIXI.Sprite.from('Pueblo_japones.jpg');
             resizeBackgroundImage();
             app.stage.addChildAt(backgroundImage, 0);
         };
