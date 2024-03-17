@@ -13,16 +13,31 @@
             overflow-y: auto;
             padding: 40px;
             position: fixed; /* Fijar el chatbox en la parte inferior de la página */
-            bottom: 40px; /* Colocar el chatbox un poco más arriba */
+            bottom: 200px; /* Colocar el chatbox un poco más arriba */
             right: 40px; /* Espacio entre el chatbox y el borde derecho de la ventana */
+            background-color: white;
         }
+
         .message {
-            margin-bottom: 10px;
+            bottom: auto; /* Restablecer la posición vertical */
+            top: 0; /* Colocar los mensajes arriba */
         }
+
         .chat-container {
             margin-right: -10px; /* Espacio entre el chatbox y el borde derecho de la ventana */
         }
 
+        #TextDetection,
+        #GPTAnswer {
+            font-family: Arial, sans-serif; /* Cambio de fuente */
+            font-size: 18px; /* Tamaño de fuente */
+            color: #333; /* Color de texto */
+            animation: slide 1.5s linear infinite alternate; /* Animación más suave */
+            font-weight: bold; /* Resaltar en negrita */
+            position: absolute; /* Fijar la posición */
+            top: 10px; /* Colocar los elementos en la parte superior */
+            transform: translateY(-50%); /* Centrar verticalmente */
+        }
         body {
             background-image: url('Pueblo_japones.jpg');
             margin: 0;
@@ -110,17 +125,6 @@
             animation: pulse 0.3s linear;
         }
 
-        #TextDetection, #GPTAnswer {
-            font-family: Arial, sans-serif; /* Cambio de fuente */
-            font-size: 18px; /* Tamaño de fuente */
-            color: #333; /* Color de texto */
-            animation: slide 1.5s linear infinite alternate; /* Animación más suave */
-            font-weight: bold; /* Resaltar en negrita */
-            position: absolute; /* Fijar la posición */
-            top: 50%; /* Alinear la parte superior al centro verticalmente */
-            transform: translateY(-50%); /* Centrar verticalmente */
-        }
-
         @keyframes slide {
             0% {
                 transform: translateX(-10px); /* Movimiento hacia la izquierda */
@@ -150,36 +154,27 @@
     <button id="BeginRecognition">Empezar reconocimiento</button>
     <div class="chat-container">
         <div class="chatbox" id="chatbox">
-            <div id="TextDetection" class="message"></div>
-            <div id="GPTAnswer" class="message"></div>
+            <div id="TextDetection" class="message">Texto detectado: </div>
+            <div id="GPTAnswer" class="message">Respuesta del GPT: </div>
         </div>
     </div>
     <script>
-        // Historial de mensajes
-        var messageHistory = [];
-
         document.getElementById("BeginRecognition").addEventListener("click", function() {
-            // Obtener el texto detectado y la respuesta del GPT
-            var textDetection = "Texto detectado: " + document.getElementById("TextDetection").value;
-            var gptAnswer = "Respuesta del GPT: " + document.getElementById("GPTAnswer").value;
+            var textDetection = document.getElementById("TextDetection").textContent;
+            var gptAnswer = document.getElementById("GPTAnswer").textContent;
 
-            // Agregar el texto detectado y la respuesta del GPT al historial de mensajes
-            messageHistory.push(textDetection);
-            messageHistory.push(gptAnswer);
-
-            // Obtener el chatbox
             var chatbox = document.getElementById("chatbox");
 
-            // Limpiar el contenido actual del chatbox
-            chatbox.innerHTML = "";
+            var textDetectionMessage = document.createElement("div");
+            textDetectionMessage.textContent = textDetection;
+            textDetectionMessage.classList.add("message");
 
-            // Recorrer el historial de mensajes y crear elementos de mensaje para cada uno
-            messageHistory.forEach(function(message) {
-                var messageElement = document.createElement("div");
-                messageElement.textContent = message;
-                messageElement.classList.add("message");
-                chatbox.appendChild(messageElement);
-            });
+            var gptAnswerMessage = document.createElement("div");
+            gptAnswerMessage.textContent = gptAnswer;
+            gptAnswerMessage.classList.add("message");
+
+            chatbox.appendChild(textDetectionMessage);
+            chatbox.appendChild(gptAnswerMessage);
         });
     </script>
 </body>
