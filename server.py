@@ -11,7 +11,7 @@ import os
 import signal
 
 client = OpenAI(
-    # This is the default and can be omitted
+    # This is the default and can be omitted    
     api_key=os.getenv("OPENAI_API_KEY"),
 )
 
@@ -28,8 +28,7 @@ websockets = {}
 
 agentBehavior = '''
 Eres un agente virtual.
-Tus respuestas deben ser cortas. No más de 3 oraciones de pocas palabras.
-Has que tus respuestas rimen con el input del usuario.  
+Tus respuestas deben ser de 3 oraciones con no mas de 5 palabras.
 '''
 
 def get_gpt_answer(messages):
