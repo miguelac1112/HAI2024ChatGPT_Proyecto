@@ -24,7 +24,7 @@
         }
 
         body {
-            background-image: url('Fondo5.jpg');
+            background-image: url('Pueblo_japones.jpg');
             margin: 0;
             padding: 0;
             display: flex;
@@ -38,9 +38,12 @@
         #avatarText {
             position: absolute;
             top: 0;
-            color: black; /* Cambiado a negro */
-            font-size: 24px;
+            color: #bb04f1; /* Cambiado a negro */
+            font-size: 40px;
             font-weight: bold;
+            z-index: 3;
+            font-family: "Angkor", serif;
+            font-style: normal;
         }
 
         #BeginRecognition {
@@ -137,10 +140,13 @@
     <script src="js/movimiento.js"></script>
     <script src="js/main.js" type="module" defer></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="avatarText">AVATAR MIKU</div>
-    <canvas id="live2d"></canvas>  
+    <div id="avatarText">HATSUNE GPT MIKU</div>
+    <canvas id="live2d"></canvas>
     <button id="BeginRecognition">Empezar reconocimiento</button>
     <div class="chat-container">
         <div class="chatbox" id="chatbox">
