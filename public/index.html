@@ -8,7 +8,7 @@
 
         .chatbox {
             width: 200px;
-            height: 400px;
+            height: 180px;
             border: 1px solid #ccc;
             overflow-y: auto;
             padding: 40px;
@@ -16,11 +16,6 @@
             bottom: 200px; /* Colocar el chatbox un poco más arriba */
             right: 40px; /* Espacio entre el chatbox y el borde derecho de la ventana */
             background-color: white;
-        }
-
-        .message {
-            bottom: auto; /* Restablecer la posición vertical */
-            top: 0; /* Colocar los mensajes arriba */
         }
 
         .chat-container {
@@ -154,8 +149,8 @@
     <button id="BeginRecognition">Empezar reconocimiento</button>
     <div class="chat-container">
         <div class="chatbox" id="chatbox">
-            <div id="TextDetection" class="message">Texto detectado: </div>
-            <div id="GPTAnswer" class="message">Respuesta del GPT: </div>
+            <div id="TextDetection" class="message" style="top: 20px;">Texto detectado: </div>
+            <div id="GPTAnswer" class="message" style="top: 20px;">Respuesta del GPT: </div>
         </div>
     </div>
     <script>
