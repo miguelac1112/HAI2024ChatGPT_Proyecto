@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Human Agent Interaction</title>
     <style>
+
+        .chatbox {
+            width: 200px;
+            height: 400px;
+            border: 1px solid #ccc;
+            overflow-y: auto;
+            padding: 40px;
+            position: fixed; /* Fijar el chatbox en la parte inferior de la página */
+            bottom: 40px; /* Colocar el chatbox un poco más arriba */
+            right: 40px; /* Espacio entre el chatbox y el borde derecho de la ventana */
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .chat-container {
+            margin-right: -10px; /* Espacio entre el chatbox y el borde derecho de la ventana */
+        }
+
         body {
             background-image: url('Fondo5.jpg');
             margin: 0;
@@ -124,7 +142,39 @@
     <div id="avatarText">AVATAR MIKU</div>
     <canvas id="live2d"></canvas>  
     <button id="BeginRecognition">Empezar reconocimiento</button>
-    <div id="TextDetection">Detección de texto</div>
-    <div id="GPTAnswer">Respuesta de GPT</div>
+    <div class="chat-container">
+        <div class="chatbox" id="chatbox">
+            <div id="TextDetection" class="message"></div>
+            <div id="GPTAnswer" class="message"></div>
+        </div>
+    </div>
+    <script>
+        // Historial de mensajes
+        var messageHistory = [];
+
+        document.getElementById("BeginRecognition").addEventListener("click", function() {
+            // Obtener el texto detectado y la respuesta del GPT
+            var textDetection = "Texto detectado: " + document.getElementById("TextDetection").value;
+            var gptAnswer = "Respuesta del GPT: " + document.getElementById("GPTAnswer").value;
+
+            // Agregar el texto detectado y la respuesta del GPT al historial de mensajes
+            messageHistory.push(textDetection);
+            messageHistory.push(gptAnswer);
+
+            // Obtener el chatbox
+            var chatbox = document.getElementById("chatbox");
+
+            // Limpiar el contenido actual del chatbox
+            chatbox.innerHTML = "";
+
+            // Recorrer el historial de mensajes y crear elementos de mensaje para cada uno
+            messageHistory.forEach(function(message) {
+                var messageElement = document.createElement("div");
+                messageElement.textContent = message;
+                messageElement.classList.add("message");
+                chatbox.appendChild(messageElement);
+            });
+        });
+    </script>
 </body>
 </html>
