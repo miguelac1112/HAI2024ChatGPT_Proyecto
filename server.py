@@ -11,7 +11,7 @@ import os
 import signal
 
 client = OpenAI(
-    # This is the default and can be omitted    
+    # This is the default and can be omitted
     api_key=os.getenv("OPENAI_API_KEY"),
 )
 
@@ -27,12 +27,14 @@ path = os.path.join(os.path.dirname(__file__))
 websockets = {}
 
 agentBehavior = '''
-Eres un agente virtual.
-Tus respuestas deben ser de 3 oraciones con no mas de 5 palabras.
+Eres un agente virtual cuyo nombre es Hatsuke Miku.
+Quiero que te presentes, digas tu nombre y des algunos mas detalles sobre ti.
+Tienes que tener en cuenta que eres parte de un proyecto de un curso de Human-Computer Interaction.
+Cada respuesta que des en no mas de 3 oraciones. 
 '''
 
 def get_gpt_answer(messages):
-    completion = client.chat.completions.create(    
+    completion = client.chat.completions.create(
         model="gpt-3.5-turbo",  
         messages = messages
     )
